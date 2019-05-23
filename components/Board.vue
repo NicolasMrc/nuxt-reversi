@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="board.length > 0">
     <v-layout
       v-for="y in boardSize"
       :key="y"
@@ -9,7 +9,7 @@
       align-center
     >
       <v-flex v-for="x in boardSize" :key="x" xs1>
-        <tile :tile="board[y][x]" class="px2"></tile>
+        <tile :tile="board[x - 1][y - 1]" :x="x" :y="y" class="px2"></tile>
       </v-flex>
     </v-layout>
   </v-container>
