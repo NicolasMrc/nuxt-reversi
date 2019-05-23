@@ -1,17 +1,11 @@
 <template>
   <div class="tile orange lighten-4 py-2" @click="play()">
-    <disk
-      class="mx-auto"
-      :class="{
-        'orange lighten-5': tile === 0,
-        'indigo lighten-2': tile === 1,
-        'teal lighten-2': tile === 2
-      }"
-    />
+    <disk class="mx-auto" :class="getColor()" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import * as disk from '../enums/diskState'
 import Disk from './Disk'
 
@@ -30,16 +24,36 @@ export default {
     x: {
       type: Number,
       default: null
+    },
+    playable: {
+      type: Boolean,
+      default: false
     }
   },
-  created() {
-    // eslint-disable-next-line no-unused-expressions,no-console
-    console.log('tile created :: ' + this.tile)
+  computed: {
+    ...mapGetters({
+      nextTurn: 'nextTurn'
+    })
   },
   methods: {
     play() {
-      // eslint-disable-next-line no-console
-      console.log('clicked on tile :: ' + this.x + ',' + this.y)
+      if (this.playable) {
+        // TODO commit this x and y to update board
+      }
+    },
+    getColor() {
+      let color = ''
+      if (this.tile === disk.NONE && this.playable) {
+        color = this.nextTurn === disk.WHITE ? 'indigo ' : 'red '
+        color += 'lighten-3 '
+      } else if (this.tile === disk.WHITE) {
+        color = 'red'
+      } else if (this.tile === disk.BLACK) {
+        color = 'indigo'
+      } else {
+        color = 'orange lighten-5'
+      }
+      return color
     }
   }
 }
