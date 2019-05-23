@@ -1,6 +1,6 @@
 import * as disk from '../enums/diskState'
 
-function playerTilesPositions(state, color) {
+function opponentTilesPositions(state, color) {
   const playerTiles = []
   for (let row = 0; row < state.boardSize; row++) {
     for (let column = 0; column < state.boardSize; column++) {
@@ -54,8 +54,7 @@ export default {
     return state.nextTurn
   },
   possibleMoves(state) {
-    // TODO adversaire
-    const playerTiles = playerTilesPositions(state, state.nextTurn)
+    const playerTiles = opponentTilesPositions(state, state.nextTurn)
 
     let moves = []
 
