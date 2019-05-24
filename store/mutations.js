@@ -6,7 +6,7 @@ function changeTile(state, x, y, color) {
   state.board[x][y] = color
 }
 
-function getOpositeColor(color) {
+function getOpositeColor(state, color) {
   if (color === disk.WHITE) {
     return disk.BLACK
   } else {
@@ -17,7 +17,7 @@ function getOpositeColor(color) {
 function switchTiles(state, tileToSwitch) {
   tileToSwitch.forEach(tile => {
     const color = state.board[tile.x][tile.y]
-    changeTile(state, tile.x, tile.y, getOpositeColor(color))
+    changeTile(state, tile.x, tile.y, getOpositeColor(state, color))
   })
 }
 
@@ -75,14 +75,16 @@ export default {
     changeTile(state, state.boardSize / 2 - 1, state.boardSize / 2, disk.BLACK)
     changeTile(state, state.boardSize / 2, state.boardSize / 2 - 1, disk.BLACK)
 
+    state.whiteCount = 2
+    state.blackCount = 2
+
     state.game = game.STARTED
   },
   switchTurn(state) {
     state.nextTurn = state.nextTurn === disk.WHITE ? disk.BLACK : disk.WHITE
   },
   playDisk(state, tile) {
-    state.board[tile.x][tile.y] =
-      state.nextTurn === disk.WHITE ? disk.BLACK : disk.WHITE
+    changeTile(state, tile.x, tile.y, getOpositeColor(state, state.nextTurn))
 
     // x and y axis
     findTiles(state, AXIS.X, true, { x: tile.x + 1, y: tile.y })
@@ -95,5 +97,9 @@ export default {
     findTiles(state, AXIS.XY, false, { x: tile.x - 1, y: tile.y - 1 })
     findTiles(state, AXIS.YX, true, { x: tile.x + 1, y: tile.y - 1 })
     findTiles(state, AXIS.YX, false, { x: tile.x - 1, y: tile.y + 1 })
+  },
+  updateScore(state) {
+    state.whiteCount = state.board.flat(1).filter(t => t === disk.WHITE).length
+    state.blackCount = state.board.flat(1).filter(t => t === disk.BLACK).length
   }
 }

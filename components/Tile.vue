@@ -1,6 +1,6 @@
 <template>
   <div class="tile orange lighten-4 py-2" @click="play()">
-    <disk class="mx-auto" :class="getColor()" />
+    <disk class="mx-auto" :color="tile" :class="getColor()" />
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
       if (this.playable) {
         this.$store.commit(mutations.PLAY_DISK, { x: this.x, y: this.y })
         this.$store.commit(mutations.SWITCH_TURN)
+        this.$store.commit(mutations.UPDATE_SCORE)
       }
     },
     getColor() {
