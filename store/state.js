@@ -5,5 +5,7 @@ export default () => ({
   board: [],
   boardSize: 8,
   nextTurn: disk.WHITE,
-  game: game.STARTED
+  game: game.STARTED,
+  whiteCount: 2,
+  blackCount: 2
 })

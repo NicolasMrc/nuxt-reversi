@@ -53,6 +53,12 @@ export default {
   nextTurn(state) {
     return state.nextTurn
   },
+  whiteCount(state) {
+    return state.whiteCount
+  },
+  blackCount(state) {
+    return state.blackCount
+  },
   gameFinished(state) {
     const blackTiles = getTilesPosition(state, state.nextTurn)
     const whiteTiles = getTilesPosition(
