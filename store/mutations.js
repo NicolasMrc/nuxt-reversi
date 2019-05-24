@@ -48,10 +48,6 @@ function findTiles(state, axis, increment, tile) {
   ) {
     const tileToCheck = state.board[tile.x][tile.y]
     if (tileToCheck === color) {
-      // eslint-disable-next-line no-console
-      console.log('---tile to switch---')
-      // eslint-disable-next-line no-console
-      console.log(tilesToSwitch)
       switchTiles(state, tilesToSwitch)
       break
     } else if (tileToCheck === disk.NONE) {
