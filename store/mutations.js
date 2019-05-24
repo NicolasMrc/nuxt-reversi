@@ -1,5 +1,6 @@
 import * as disk from '../enums/diskState'
 import * as game from '../enums/gameState'
+import * as AXIS from '../enums/axis'
 
 function changeTile(state, x, y, color) {
   state.board[x][y] = color
@@ -21,56 +22,36 @@ function switchTiles(state, tileToSwitch) {
   })
 }
 
-function findTilesToSwitchInRow(state, x, y, color) {
-  let tileToSwitch = []
-  for (let i = x - 1; i >= 0; i--) {
-    if (state.board[i][y] === color) {
-      switchTiles(state, tileToSwitch)
-      i = -1
-    } else if (state.board[i][y] === disk.NONE) {
-      tileToSwitch = []
-      i = -1
-    } else {
-      tileToSwitch.push({ x: i, y: y })
-    }
-  }
-  tileToSwitch = []
-  for (let i = x + 1; i < state.boardSize; i++) {
-    if (state.board[i][y] === color) {
-      switchTiles(state, tileToSwitch)
-      i = state.boardSize
-    } else if (state.board[i][y] === disk.NONE) {
-      tileToSwitch = []
-      i = state.boardSize
-    } else {
-      tileToSwitch.push({ x: i, y: y })
-    }
-  }
-}
+function findTiles(state, axis, increment, origin) {
+  const color = state.nextTurn === disk.WHITE ? disk.BLACK : disk.WHITE
+  const tilesToSwitch = []
+  let startingPoint = 0
 
-function findTilesToSwitchInColumn(state, x, y, color) {
-  let tileToSwitch = []
-  for (let i = y - 1; i >= 0; i--) {
-    if (state.board[x][i] === color) {
-      switchTiles(state, tileToSwitch)
-      i = -1
-    } else if (state.board[x][i] === disk.NONE) {
-      tileToSwitch = []
-      i = -1
-    } else {
-      tileToSwitch.push({ x: x, y: i })
-    }
+  if (axis === AXIS.X) {
+    startingPoint = increment ? origin.x + 1 : origin.x - 1
+  } else {
+    startingPoint = increment ? origin.y + 1 : origin.y - 1
   }
-  tileToSwitch = []
-  for (let i = y + 1; i < state.boardSize; i++) {
-    if (state.board[x][i] === color) {
-      switchTiles(state, tileToSwitch)
-      i = state.boardSize
-    } else if (state.board[x][i] === disk.NONE) {
-      tileToSwitch = []
-      i = state.boardSize
+
+  for (
+    let i = startingPoint;
+    increment ? i < state.boardSize : i >= 0;
+    increment ? i++ : i--
+  ) {
+    if (i < 0 || i >= state.boardSize) {
+      break
+    }
+    const tileToCheck =
+      axis === AXIS.X ? state.board[i][origin.y] : state.board[origin.x][i]
+    if (tileToCheck === color) {
+      switchTiles(state, tilesToSwitch)
+      break
+    } else if (tileToCheck === disk.NONE) {
+      break
     } else {
-      tileToSwitch.push({ x: x, y: i })
+      const tile =
+        axis === AXIS.X ? { x: i, y: origin.y } : { x: origin.x, y: i }
+      tilesToSwitch.push(tile)
     }
   }
 }
@@ -99,7 +80,10 @@ export default {
   playDisk(state, position) {
     const color = state.nextTurn === disk.WHITE ? disk.BLACK : disk.WHITE
     state.board[position.x][position.y] = color
-    findTilesToSwitchInRow(state, position.x, position.y, color)
-    findTilesToSwitchInColumn(state, position.x, position.y, color)
+
+    findTiles(state, AXIS.X, true, position)
+    findTiles(state, AXIS.X, false, position)
+    findTiles(state, AXIS.Y, true, position)
+    findTiles(state, AXIS.Y, false, position)
   }
 }
