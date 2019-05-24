@@ -5,7 +5,7 @@
         <h1 class="display-2">Reversi game made with Nuxt</h1>
       </div>
     </v-flex>
-    <v-flex xs12 md8>
+    <v-flex xs12 lg8>
       <board />
     </v-flex>
   </v-layout>

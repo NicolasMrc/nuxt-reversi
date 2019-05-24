@@ -7,6 +7,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import * as disk from '../enums/diskState'
+import * as mutations from '../enums/mutations'
 import Disk from './Disk'
 
 export default {
@@ -38,7 +39,8 @@ export default {
   methods: {
     play() {
       if (this.playable) {
-        // TODO commit this x and y to update board
+        this.$store.commit(mutations.PLAY_DISK, { x: this.x, y: this.y })
+        this.$store.commit(mutations.SWITCH_TURN)
       }
     },
     getColor() {
