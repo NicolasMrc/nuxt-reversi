@@ -1,6 +1,6 @@
 import * as disk from '../enums/diskState'
 
-function opponentTilesPositions(state, color) {
+function getTilesPosition(state, color) {
   const playerTiles = []
   for (let row = 0; row < state.boardSize; row++) {
     for (let column = 0; column < state.boardSize; column++) {
@@ -53,8 +53,24 @@ export default {
   nextTurn(state) {
     return state.nextTurn
   },
+  gameFinished(state) {
+    const blackTiles = getTilesPosition(state, state.nextTurn)
+    const whiteTiles = getTilesPosition(
+      state,
+      state.nextTurn === disk.WHITE ? disk.BLACK : disk.WHITE
+    )
+    const tiles = blackTiles.concat(whiteTiles)
+
+    let possibleMoves = 0
+
+    tiles.forEach(tile => {
+      possibleMoves += getEmptySurroundingTiles(state, tile).length
+    })
+
+    return possibleMoves === 0
+  },
   possibleMoves(state) {
-    const playerTiles = opponentTilesPositions(state, state.nextTurn)
+    const playerTiles = getTilesPosition(state, state.nextTurn)
 
     let moves = []
 
