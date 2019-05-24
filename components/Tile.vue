@@ -47,7 +47,7 @@ export default {
       let color = ''
       if (this.tile === disk.NONE && this.playable) {
         color = this.nextTurn === disk.WHITE ? 'indigo ' : 'red '
-        color += 'lighten-3 '
+        color += 'lighten-3 hint'
       } else if (this.tile === disk.WHITE) {
         color = 'red'
       } else if (this.tile === disk.BLACK) {
