@@ -18,6 +18,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
+        href: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://use.fontawesome.com/releases/v5.8.2/css/brands.css'
+      },
+      {
+        rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       }
@@ -52,7 +60,6 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
   /*
    ** Build configuration
    */

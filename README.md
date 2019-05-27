@@ -1,6 +1,10 @@
 # nuxt-reversi
 
-> Revesi Game made with Nuxt
+> Revesi Game made with Nuxt.
+
+> Check out the [Live Demo](https://reversi.nicolasmercier.io).
+
+![screenshot](https://github.com/NicolasMrc/nuxt-reversi/tree/master/static/nuxt-reversi.png)
 
 ## Build Setup
 
@@ -18,5 +22,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).

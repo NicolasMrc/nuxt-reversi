@@ -18,6 +18,14 @@
     <v-flex xs12 lg8>
       <board />
     </v-flex>
+    <a
+      id="github"
+      target="_blank"
+      href="https://github.com/NicolasMrc/nuxt-reversi"
+      class="display-1 grey--text"
+    >
+      <i class="fab fa-github"></i>
+    </a>
   </v-layout>
 </template>
 
@@ -48,5 +56,13 @@ h2.blackCount {
   position: absolute;
   left: 5vw;
   font-size: 10vw;
+}
+#github {
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
+}
+#github:hover {
+  color: rgba(0, 0, 0, 0.8) !important;
 }
 </style>
