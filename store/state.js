@@ -4,6 +4,8 @@ import * as game from '../enums/gameState'
 export default () => ({
   board: [],
   boardSize: 8,
-  newtTurn: disk.WHITE,
-  game: game.STARTED
+  nextTurn: disk.WHITE,
+  game: game.STARTED,
+  whiteCount: 2,
+  blackCount: 2
 })
