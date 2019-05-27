@@ -4,7 +4,7 @@
 
 > Check out the [Live Demo](https://reversi.nicolasmercier.io).
 
-![screenshot](https://github.com/NicolasMrc/nuxt-reversi/tree/master/static/nuxt-reversi.png)
+![screenshot](https://github.com/NicolasMrc/nuxt-reversi/blob/master/static/nuxt-reversi.PNG)
 
 ## Build Setup
 
