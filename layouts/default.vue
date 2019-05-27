@@ -5,11 +5,14 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app class="text-xs-center">
+    <v-footer :fixed="fixed" app class="text-xs-center" dark height="50">
       <v-container class="pa-0">
         <v-layout justify-center align-center>
           <v-flex>
-            <span>Made By Nico with love & coffee</span>
+            <span class="font-weight-light"
+              >Made By Nico with <i class="fa fa-heart"></i> &
+              <i class="fa fa-coffee"></i
+            ></span>
           </v-flex>
         </v-layout>
       </v-container>
@@ -21,25 +24,7 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      fixed: false
     }
   }
 }
